@@ -1,0 +1,48 @@
+{% extends 'blog/base.html' %}
+
+{% block meta %}
+<title>SCFS - จำหน่ายอาหารแมวทุกประเภท จัดส่งฟรีทั่วประเทศ</title>
+<meta name="description" content="ร้านอาหารแมวออนไลน์ที่ใหญ่ที่สุด มีสินค้าให้เลือกมากกว่า 1,000 รายการ พร้อมจัดส่งฟรีทั่วประเทศ รับประกันของแท้ 100% ราคาถูกกว่าห้าง">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<!-- Hero Section -->
+<div class="bg-light text-dark py-5 mb-5">
+  <div class="container">
+      <div class="row align-items-center">
+          <div class="col-lg-6">
+              <h1 class="display-4 fw-bold">SCFS - จำหน่ายอาหารแมวทุกประเภท จัดส่งฟรีทั่วประเทศ</h1>
+              <p class="lead">ร้านอาหารแมวออนไลน์ที่ใหญ่ที่สุด มีสินค้าให้เลือกมากกว่า 1,000 รายการ พร้อมจัดส่งฟรีทั่วประเทศ รับประกันของแท้ 100% ราคาถูกกว่าห้าง</p>
+              <hr class="my-4">
+              <p>กดเลือกซื้อ แล้วพบกับอาหารแมวที่แมวเหมียวของคุณต้องชอบ</p>
+              <a class="btn btn-outline-dark btn-lg" href="/" role="button">เลือกซื้อเลย</a>
+          </div>
+          <div class="col-lg-6 d-none d-lg-block">
+              <img src="https://www.purina.co.za/sites/default/files/2020-12/Product%20Listing%20Hero%20Cat%20Food.jpg" alt="Blog Hero Image" class="img-fluid rounded">
+          </div>
+      </div>
+  </div>
+</div>
+
+  <h2>Blog</h2>
+  <div class="row">  
+    {% for post in all_posts %}   
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <img src="{{ post.featured_image.url }}" class="card-img-top" alt="{{ post.title }}">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.description }}</p>
+            <a href="{{ post.get_absolute_url }}" class="btn btn-outline-dark">อ่านเพิ่มเติม</a>
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+
+
+

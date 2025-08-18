@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block meta %}
+<title>{{ single_post.title }}</title>
+<meta name="description" content="{{ single_post.description }}">
+<rel="canonical" href="{{ single_post.get_absolute_url }}">
+
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <br>
+  <div class="col-sm-8">  
+    <h1>{{ single_post.title }}</h1>
+    <p>{{ single_post.description }}</p>
+    <img src="{{ single_post.featured_image.url }}" class="card-img-top" alt="{{ single_post.title }}">
+    <br><br>
+    <p>{{ single_post.body }}</p>
+  </div>
+</div>
+{% endblock %}
+
+
+
+
