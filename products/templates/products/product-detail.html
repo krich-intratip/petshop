@@ -35,11 +35,6 @@
             </p>
             <h2>฿{{ product.price }}</h2>
             <p>{{ product.description }}</p>
-            {% if product.stock > 0 %}
-            <p class="text-success">มีสินค้าในสต็อก: {{ product.stock }}</p>
-            {% else %}
-            <p class="text-danger">สินค้าหมด</p>
-            {% endif %}
 
             <!-- LINE Button -->
             <div class="mt-4">
