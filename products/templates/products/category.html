@@ -1,0 +1,114 @@
+{% extends 'blog/base.html' %}
+{% block meta %}
+<title>{{ category.name }} | SCFS</title>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <br>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ category.name }}</li>
+        </ol>
+    </nav>
+    <!-- Category Header -->
+    <div class="row my-4">
+        <div class="col">
+            <h1>{{ category.name }}</h1>
+            <p class="lead">{{ category.description }}</p>
+        </div>
+    </div>
+    <!-- Products Grid -->
+    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+        {% for product in products %}
+        <div class="col mb-4">
+            <div class="card h-100">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description|truncatewords:20 }}</p>
+                    <p class="card-text">
+                        <strong>ราคา: ฿{{ product.price }}</strong>
+                    </p>
+                    {% if product.stock > 0 %}
+                        <p class="text-success">สินค้าคงเหลือ: {{ product.stock }}</p>
+                    {% else %}
+                        <p class="text-danger">สินค้าหมด</p>
+                    {% endif %}
+                    <a href="{{ product.get_absolute_url }}" class="btn btn-primary">
+                        ดูรายละเอียด
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p>ไม่พบสินค้าในหมวดหมู่นี้</p>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- End Products Grid -->
+
+    <!-- Related Blog Posts -->
+    <div class="row mt-5">
+        <div class="col">
+            <h3>บทความที่เกี่ยวข้อง</h3>
+            <ul class="list-unstyled">
+                {% for post in related_posts %}
+                <li class="mb-3">
+                    <a href="{{ post.get_absolute_url }}" class="text-dark text-decoration-none">
+                        <div class="d-flex align-items-center">
+                            {% if post.featured_image %}
+                            <img src="{{ post.featured_image.url }}" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;" alt="{{ post.title }}">
+                            {% else %}
+                            <img src="https://via.placeholder.com/80" class="rounded me-3" alt="Placeholder Image">
+                            {% endif %}
+                            <div>
+                                <h6 class="mb-0">{{ post.title }}</h6>
+                                <small class="text-muted">{{ post.description|truncatewords:10 }}</small>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                {% empty %}
+                <li>
+                    <p class="text-muted">ไม่พบบทความที่เกี่ยวข้อง</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <!-- End Related Blog Posts -->
+
+    <!-- FAQ Accordion -->
+    <div class="row">
+        <div class="col-md-6 mx-auto">  <!-- Center the FAQ section and set width to 50% -->
+            <br>
+            <h3 class="text-center">คำถามที่พบบ่อย</h3>  <!-- Center the heading -->
+            {% if faqs %}
+            <div class="accordion" id="faqAccordion">
+                {% for faq in faqs %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                        <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="collapse{{ forloop.counter }}">
+                            {{ faq.question }}
+                        </button>
+                    </h2>
+                    <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            {{ faq.answer }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-center">ไม่มีคำถามที่พบบ่อยในขณะนี้</p>  <!-- Center the fallback message -->
+            {% endif %}
+        </div>
+    </div>
+    <!-- End FAQ Accordion -->
+</div>
+{% endblock %}
