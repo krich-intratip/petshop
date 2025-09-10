@@ -5,7 +5,10 @@ venv/
 # ฐานข้อมูล
 db.sqlite3
 
+# Media files
 media/
+author_images/
+blog_images/
 
 # ไฟล์เฉพาะ OS
 .DS_Store
