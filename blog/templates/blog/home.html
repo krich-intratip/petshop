@@ -8,22 +8,25 @@
 <div class="container py-3">
     <!-- Hero Section -->
     <div class="glass-hero text-dark py-5 px-4 px-lg-5 mb-5">
-        <div class="row align-items-center g-4">
-            <div class="col-lg-6">
-                <h1 class="display-4 fw-bold">Peakmaker Cat Shop - จำหน่ายอาหารแมวทุกประเภท จัดส่งฟรีทั่วประเทศ</h1>
+        <div class="row align-items-stretch g-4 g-lg-5">
+            <div class="col-lg-6 d-flex flex-column">
+                <h1 class="display-4 fw-bold"><span class="brand-gradient-text">Peakmaker Cat Shop</span> — จำหน่ายอาหารแมวทุกประเภท จัดส่งฟรีทั่วประเทศ</h1>
                 <p class="lead">ร้านอาหารแมวออนไลน์ที่ใหญ่ที่สุด มีสินค้าให้เลือกมากกว่า 1,000 รายการ พร้อมจัดส่งฟรีทั่วประเทศ รับประกันของแท้ 100% ราคาถูกกว่าห้าง</p>
                 <hr class="my-4 opacity-50">
                 <p>กดเลือกซื้อ แล้วพบกับอาหารแมวที่แมวเหมียวของคุณต้องชอบ</p>
                 <a class="btn btn-primary btn-lg" href="/products/dry-cat-food/" role="button">เลือกซื้อเลย</a>
             </div>
-            <div class="col-lg-6 d-none d-lg-block text-center">
-                <img src="{% static 'blog/images/blog-hero.jpg' %}"
-                     width="700" height="467"
-                     class="img-fluid hero-visual"
-                     style="max-height: 420px; width: 100%; object-fit: cover;"
-                     alt="Peakmaker Cat Shop — แมวและอาหารแมวคุณภาพ"
-                     fetchpriority="high"
-                     loading="eager">
+            <div class="col-lg-6 d-none d-lg-flex flex-column">
+                {# รูปแนวตั้ง — กว้างเท่าคอลัมน์ซ้าย (50/50) — home-hero-cat.jpg #}
+                <div class="hero-image-wrap hero-image-wrap--portrait w-100 flex-grow-1">
+                    <img src="{% static 'blog/images/home-hero-cat.jpg' %}"
+                         width="900"
+                         height="1200"
+                         class="img-fluid hero-visual hero-visual--portrait"
+                         alt="Peakmaker Cat Shop"
+                         fetchpriority="high"
+                         loading="eager">
+                </div>
             </div>
         </div>
     </div>

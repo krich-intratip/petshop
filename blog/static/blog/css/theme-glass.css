@@ -22,6 +22,45 @@
   100% { background-position: 0% 50%; }
 }
 
+/* ชื่อร้าน Peakmaker Cat Shop — ไล่เฉดสี + เคลื่อนไหว */
+@keyframes brand-gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.brand-gradient-text {
+  display: inline;
+  font-weight: inherit;
+  background-image: linear-gradient(
+    120deg,
+    #5b4aa8 0%,
+    #7c6bcf 18%,
+    #4db8c9 38%,
+    #e8a0c4 58%,
+    #8b7ecf 78%,
+    #5ec4d4 100%
+  );
+  background-size: 220% auto;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: brand-gradient-flow 9s ease infinite;
+}
+
+.brand-gradient-text--static {
+  animation: none;
+  background-size: 100% 100%;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -131,8 +170,25 @@ body.glass-theme .card:hover {
   box-shadow: var(--shadow-lift), inset 0 1px 0 var(--glass-highlight);
 }
 
-body.glass-theme .card-img-top {
+/* รูปในการ์ด: แสดงภาพเต็มในกรอบ ไม่ครอป (contain + พื้นหลังอ่อน) */
+body.glass-theme .card .card-img-top {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  object-position: center;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 0.5rem;
+  box-sizing: border-box;
   border-radius: 1.1rem 1.1rem 0 0 !important;
+}
+
+body.glass-theme .card .card-img-top.card-img-tight {
+  height: 140px;
+  padding: 0.35rem;
+}
+
+body.glass-theme .card > a > .card-img-top {
+  display: block;
 }
 
 /* —— Buttons —— */
@@ -186,13 +242,43 @@ body.glass-theme .btn-outline-success {
   transform-style: preserve-3d;
 }
 
-.glass-hero .hero-visual {
+.glass-hero .hero-image-wrap {
+  background: rgba(255, 255, 255, 0.4);
   border-radius: 1.25rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+/* รูป hero แนวตั้ง — เต็มความกว้างคอลัมน์ (เท่าบล็อกข้อความซ้ายเมื่อใช้ col 6/6) */
+.glass-hero .hero-image-wrap--portrait {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.1rem;
+}
+
+.glass-hero .hero-visual {
+  border-radius: 1.15rem;
+  width: 100%;
+  max-height: min(480px, 70vh);
+  height: auto;
+  object-fit: contain;
+  object-position: center;
   box-shadow:
     0 12px 40px rgba(100, 80, 140, 0.2),
     inset 0 0 0 1px rgba(255, 255, 255, 0.4);
   transform: perspective(1000px) rotateY(-4deg);
   transition: transform 0.5s ease;
+}
+
+.glass-hero .hero-visual--portrait {
+  width: 100%;
+  max-width: 100%;
+  max-height: min(720px, 85vh);
+  height: auto;
 }
 
 .glass-hero:hover .hero-visual {
@@ -325,5 +411,9 @@ body.glass-theme .btn-line {
   }
   #sparkle-canvas {
     display: none;
+  }
+  .brand-gradient-text {
+    animation: none;
+    background-size: 100% 100%;
   }
 }

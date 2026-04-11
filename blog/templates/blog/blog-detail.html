@@ -37,7 +37,7 @@
         {% for p in related_products %}
         <div class="col">
           <div class="card h-100">
-            {% if p.image %}<img src="{{ p.image.url }}" class="card-img-top" alt="{{ p.name }}" style="object-fit:cover;height:120px;">{% endif %}
+            {% if p.image %}<img src="{{ p.image.url }}" class="card-img-top card-img-tight" alt="{{ p.name }}">{% endif %}
             <div class="card-body py-2">
               <h6 class="card-title mb-1">{{ p.name }}</h6>
               <p class="card-text small mb-2">฿{{ p.price }}</p>
