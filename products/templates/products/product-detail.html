@@ -1,8 +1,37 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 {% block meta %}
-<title>{{ product.name }} | SCFS</title>
+<title>{{ product.name }} | Peakmaker Cat Shop</title>
+<meta name="description" content="{{ product.description }}">
+{% endblock %}
+{% block og_type %}product{% endblock %}
+{% block og_title %}{{ product.name }} ฿{{ product.price }} | Peakmaker Cat Shop{% endblock %}
+{% block og_description %}{{ product.description }}{% endblock %}
+{% block tw_title %}{{ product.name }} ฿{{ product.price }} | Peakmaker Cat Shop{% endblock %}
+{% block tw_description %}{{ product.description }}{% endblock %}
+{% if product.image %}
+{% block og_image %}{{ SITE_URL }}{{ product.image.url }}{% endblock %}
+{% endif %}
 
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ product.name }}",
+  "description": "{{ product.description|striptags }}",
+  {% if product.image %}"image": "{{ SITE_URL }}{{ product.image.url }}",{% endif %}
+  "brand": {"@type": "Brand", "name": "{{ SITE_NAME }}"},
+  "offers": {
+    "@type": "Offer",
+    "price": "{{ product.price }}",
+    "priceCurrency": "THB",
+    "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+    "url": "{{ SITE_URL }}{{ product.get_absolute_url }}",
+    "seller": {"@type": "Organization", "name": "{{ SITE_NAME }}"}
+  }
+}
+</script>
 {% endblock %}
 {% block content %}
 <div class="container">
@@ -10,7 +39,7 @@
     <!-- Breadcrumb Navigation -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/">หน้าแรก</a></li>
           <li class="breadcrumb-item"><a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a></li>
           <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
         </ol>

@@ -1,13 +1,41 @@
 {% extends 'blog/base.html' %}
 {% block meta %}
-<title>{{ category.name }} | SCFS</title>
+<title>{{ category.name }} | Peakmaker Cat Shop</title>
+<meta name="description" content="{{ category.description }}">
+{% endblock %}
+{% block og_title %}{{ category.name }} | Peakmaker Cat Shop{% endblock %}
+{% block og_description %}{{ category.description }}{% endblock %}
+{% block tw_title %}{{ category.name }} | Peakmaker Cat Shop{% endblock %}
+{% block tw_description %}{{ category.description }}{% endblock %}
+{% if category.image %}
+{% block og_image %}{{ SITE_URL }}{{ category.image.url }}{% endblock %}
+{% endif %}
+
+{% block extra_head %}
+{% if faqs %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for faq in faqs %}
+    {
+      "@type": "Question",
+      "name": "{{ faq.question }}",
+      "acceptedAnswer": {"@type": "Answer", "text": "{{ faq.answer|striptags }}"}
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
 {% endblock %}
 {% block content %}
 <div class="container">
     <br>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/">หน้าแรก</a></li>
           <li class="breadcrumb-item active" aria-current="page">{{ category.name }}</li>
         </ol>
     </nav>

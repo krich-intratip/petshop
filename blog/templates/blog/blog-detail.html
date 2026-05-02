@@ -1,10 +1,33 @@
 {% extends 'blog/base.html' %}
 
 {% block meta %}
-<title>{{ single_post.title }}</title>
+<title>{{ single_post.title }} | Peakmaker Cat Shop</title>
 <meta name="description" content="{{ single_post.description }}">
-<link rel="canonical" href="{{ single_post.get_absolute_url }}">
+{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_title %}{{ single_post.title }} | Peakmaker Cat Shop{% endblock %}
+{% block og_description %}{{ single_post.description }}{% endblock %}
+{% block tw_title %}{{ single_post.title }} | Peakmaker Cat Shop{% endblock %}
+{% block tw_description %}{{ single_post.description }}{% endblock %}
+{% if single_post.featured_image %}
+{% block og_image %}{{ SITE_URL }}{{ single_post.featured_image.url }}{% endblock %}
+{% endif %}
 
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ single_post.title }}",
+  "description": "{{ single_post.description }}",
+  {% if single_post.featured_image %}"image": "{{ SITE_URL }}{{ single_post.featured_image.url }}",{% endif %}
+  {% if single_post.author %}"author": {"@type": "Person", "name": "{{ single_post.author.name }}"},{% endif %}
+  "datePublished": "{{ single_post.date_created|date:'c' }}",
+  "dateModified": "{{ single_post.date_updated|date:'c' }}",
+  "publisher": {"@type": "Organization", "name": "{{ SITE_NAME }}"},
+  "mainEntityOfPage": "{{ SITE_URL }}{{ single_post.get_absolute_url }}"
+}
+</script>
 {% endblock %}
 
 {% block content %}

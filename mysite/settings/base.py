@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
     'blog',
     'products',
     'django_summernote',
@@ -90,6 +91,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LINE_ORDER_URL = 'https://line.me/R/ti/p/@Dr.peakmaker'
+SITE_URL = os.environ.get('SITE_URL', 'https://petshop.pk-research.work')
+SITE_NAME = 'Peakmaker Cat Shop'
 
 # เวอร์ชันและวันอัปเดตล่าสุด — ปรับทั้งคู่ทุกครั้งที่ deploy / มีการอัปเดตเว็บ
 # วันที่ใช้ปี ค.ศ. ใน date(); แสดงผลในเทมเพลตเป็น dd-mm-yyyy (ปี พ.ศ.)
