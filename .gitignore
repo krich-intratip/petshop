@@ -19,3 +19,5 @@ blog_images/
 
 # ไฟล์เฉพาะ OS
 .DS_Store
+# SSH Keys
+petshop_ssh*
